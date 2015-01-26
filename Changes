@@ -2,6 +2,11 @@ Revision history for DBIx-Class-Migration.
 
 NOTE: Date format is YEAR-MONTH-DAY
 
+0.046     2015-01-26 03:10:37+00:00 Europe/London
+
+        - Switch from Test::postgresql to Test::PostgreSQL
+        ( the latter is a fork of the former )
+
 0.04_5    2015-01-15 01:44:23+00:00 Europe/London
 
         - Don't use config_dir from DBIx::Class::Fixtures as a Path::Class::Dir,
