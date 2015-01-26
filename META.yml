@@ -16,6 +16,9 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
 name: DBIx-Class-Migration
+no_index:
+  namespace:
+    - MusicBase
 requires:
   Class::Load: '0'
   Config::MySQL: '0.02'
@@ -44,7 +47,7 @@ resources:
   bugtracker: https://github.com/jjn1056/DBIx-Class-Migration/issues
   homepage: https://github.com/jjn1056/DBIx-Class-Migration
   repository: https://github.com/jjn1056/DBIx-Class-Migration.git
-version: '0.046'
+version: 0.004_07
 x_contributors:
   - 'Alan Berndt <alan@eatabrick.org>'
   - 'Andy Gorman <andy@apacesystems.com>'
