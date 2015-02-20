@@ -47,7 +47,7 @@ resources:
   bugtracker: https://github.com/jjn1056/DBIx-Class-Migration/issues
   homepage: https://github.com/jjn1056/DBIx-Class-Migration
   repository: https://github.com/jjn1056/DBIx-Class-Migration.git
-version: 0.04_7
+version: '0.048'
 x_contributors:
   - 'Alan Berndt <alan@eatabrick.org>'
   - 'Andy Gorman <andy@apacesystems.com>'
