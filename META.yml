@@ -10,7 +10,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: '0'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.031, CPAN::Meta::Converter version 2.143240'
+generated_by: 'Dist::Zilla version 5.032, CPAN::Meta::Converter version 2.143240'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -47,26 +47,4 @@ resources:
   bugtracker: https://github.com/jjn1056/DBIx-Class-Migration/issues
   homepage: https://github.com/jjn1056/DBIx-Class-Migration
   repository: https://github.com/jjn1056/DBIx-Class-Migration.git
-version: '0.048'
-x_contributors:
-  - 'Alan Berndt <alan@eatabrick.org>'
-  - 'Andy Gorman <andy@apacesystems.com>'
-  - 'Andy Jones <andy@broadbean.com>'
-  - 'Breno G. de Oliveira <garu@cpan.org>'
-  - 'Brian Wightman <MidLifeXis@wightmanfam.org>'
-  - 'Chris Weyl <cweyl@alumni.drew.edu>'
-  - 'chromatic <chromatic@wgz.org>'
-  - 'Fitz Elliott <felliott@virginia.edu>'
-  - 'jjn1056 <jjn1056@yahoo.com>'
-  - 'John Napiorkowski <jjn1056@yahoo.com>'
-  - 'Logan <loganbell@gmail.com>'
-  - 'Matthias Krull <mkrull@uninets.eu>'
-  - 'moltar <moltar@moltar.net>'
-  - 'Neil Bowers <neil@bowers.com>'
-  - 'Panu Ervamaa <panu.ervamaa@frantic.com>'
-  - 'Paul Johnson <paul@pjcj.net>'
-  - 'Samuel Kaufman <samuel.c.kaufman@gmail.com>'
-  - 'Samuel Kaufman <skaufman@cpan.org>'
-  - 'skaufman <sam@socialflow.com>'
-  - 'Volker Kroll <kroll@strato-rz.de>'
-  - 'Volker Kroll (vkroll) <kroll@strato-rz.de>'
+version: '0.049'
