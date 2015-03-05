@@ -1,6 +1,6 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.050";
+our $VERSION = "0.051";
 $VERSION = eval $VERSION;
 
 use Moose;
@@ -547,6 +547,17 @@ before [qw/install upgrade downgrade/], sub {
       $self->dbic_dh->version_storage_is_installed ? $self->dbic_dh->database_version : 0),
   );
 };
+
+# We need to explicitly disconnect so that we can properly
+# shutdown some databases (like Postgresql) without generating
+# errors in cleanup.  Basically if we don't disconnect we often
+# end up with blocking commands running on the server at the time
+# we are trying to shut it down.
+
+sub DEMOLISH {
+  my $self = shift;
+  $self->schema->storage->disconnect;
+}
 
 __PACKAGE__->meta->make_immutable;
 
@@ -1169,7 +1180,7 @@ L<Test::mysqld>, L<Test::PostgreSQL>.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2013, John Napiorkowski L<email:jjnapiork@cpan.org>
+Copyright 2013-2015, John Napiorkowski L<email:jjnapiork@cpan.org>
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
