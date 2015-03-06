@@ -198,6 +198,7 @@ lib/DBIx/Class/Migration/Tutorial/Testing.pod
 lib/DBIx/Class/Migration/Tutorial/ThirdMigration.pod
 lib/DBIx/Class/Migration/Types.pm
 lib/Test/DBIx/Class/FixtureCommand/Population.pm
+t/.devdir
 t/00-clean.t
 t/help.t
 t/install-version-storage.t
@@ -222,6 +223,7 @@ t/missing-schema-version.t
 t/ordering.t
 t/runscript.t
 t/script.t
+t/share/.DS_Store
 t/share/donotremove.txt
 t/upgrade-downgrade-sqlite.t
 t/use.t
