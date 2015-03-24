@@ -3,7 +3,7 @@ abstract: 'Tools to make migrating your DBIx::Class databases easier'
 author:
   - 'John Napiorkowski <jjnapiork@cpan.org>'
 build_requires:
-  File::Path: '2.09'
+  File::Path: '0'
   File::Spec::Functions: '0'
   Test::Most: '0.34'
   Test::Requires: '0.08'
@@ -27,11 +27,11 @@ requires:
   DBIx::Class::Fixtures: '1.001028'
   DBIx::Class::Schema::Loader: '0.07042'
   Devel::PartialDump: '0.17'
-  File::Copy: '2.30'
-  File::Path: '2.09'
+  File::Copy: '0'
+  File::Path: '0'
   File::ShareDir::ProjectDistDir: '1.000004'
   File::Spec: '0'
-  File::Temp: '0.2304'
+  File::Temp: '0'
   JSON::XS: '3.01'
   Moose: '2.1403'
   MooseX::Attribute::ENV: '0.02'
@@ -47,4 +47,4 @@ resources:
   bugtracker: https://github.com/jjn1056/DBIx-Class-Migration/issues
   homepage: https://github.com/jjn1056/DBIx-Class-Migration
   repository: https://github.com/jjn1056/DBIx-Class-Migration.git
-version: '0.056'
+version: '0.057'
