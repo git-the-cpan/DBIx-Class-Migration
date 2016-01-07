@@ -1,10 +1,10 @@
 package DBIx::Class::Migration;
 
-our $VERSION = "0.057";
+our $VERSION = "0.058";
 $VERSION = eval $VERSION;
 
 use Moose;
-use JSON::XS;
+use JSON::MaybeXS qw(JSON);
 use File::Copy 'cp';
 use File::Spec::Functions 'catdir', 'catfile', 'updir';
 use File::Path 'mkpath', 'remove_tree';
@@ -244,7 +244,7 @@ sub _sets_data_from_sources {
 }
 
 sub _create_all_fixture_config_from_sources {
-  JSON::XS->new->pretty(1)->encode({
+  JSON->new->pretty(1)->encode({
     "belongs_to" => { "fetch" => 0 },
     "has_many" => { "fetch" => 0 },
     "might_have" => { "fetch" => 0 },
@@ -334,10 +334,11 @@ sub drop_tables {
     foreach my $source ($schema->sources) {
       my $table = $schema->source($source)->name;
       print "Dropping table $table\n";
+      my $tableq = $schema->storage->dbh->quote_identifier($table);
       if(ref($schema->storage) =~m/Pg$/) {
-        $schema->storage->dbh->do("drop table $table CASCADE");
+        $schema->storage->dbh->do("drop table $tableq CASCADE");
       } else {
-        $schema->storage->dbh->do("drop table $table");
+        $schema->storage->dbh->do("drop table $tableq");
       }
     }
   });
@@ -366,8 +367,8 @@ sub _prepare_fixture_data_dir {
   return $fixture_conf_dir;
 }
 
-sub build_dbic_fixtures {
-  my $dbic_fixtures = (my $self = shift)->dbic_fixture_class;
+sub build_dbic_fixtures_init_args {
+  my $self = shift;
   my $version = $self->dbic_dh->version_storage_is_installed ?
     $self->dbic_dh->database_version : do {
       print "Since this database is not versioned, we will assume version ";
@@ -379,12 +380,15 @@ sub build_dbic_fixtures {
 
   print "Reading configurations from $conf_dir\n";
 
-  my $init_args = {
+  return {
     config_dir => $conf_dir,
     debug => ($ENV{DBIC_MIGRATION_DEBUG}||0),
     %{$self->dbic_fixtures_extra_args}};
+}
 
-  $dbic_fixtures->new($init_args);
+sub build_dbic_fixtures {
+  my $dbic_fixtures = (my $self = shift)->dbic_fixture_class;
+  $dbic_fixtures->new($self->build_dbic_fixtures_init_args);
 }
 
 sub _schema_from_database {
@@ -447,7 +451,7 @@ sub delete_named_sets {
     my ($self, $path) = @_;
     return unless -d $path;
     print "Deleting $path \n";
-    $path->rmtree;
+    remove_tree($path);
   }
 
 
@@ -537,7 +541,9 @@ before [qw/install upgrade downgrade/], sub {
   my ($self, @args) = @_;
   %ENV = (
     %ENV,
-    DBIC_MIGRATION_FIXTURES_OBJ => $self->build_dbic_fixtures,
+    DBIC_MIGRATION_FIXTURES_CLASS => $self->dbic_fixture_class,
+    DBIC_MIGRATION_FIXTURES_INIT_ARGS => JSON::MaybeXS->new->encode($self->build_dbic_fixtures_init_args),
+#    DBIC_MIGRATION_FIXTURES_OBJ => $self->build_dbic_fixtures,
     DBIC_MIGRATION_SCHEMA_CLASS => $self->schema_class,
     DBIC_MIGRATION_TARGET_DIR => $self->target_dir,
     DBIC_MIGRATION_FIXTURE_DIR => catdir($self->target_dir, 'fixtures', $self->dbic_dh->schema_version),
